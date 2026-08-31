@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta — Gestão de Tráfego Pago</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F7F3EC;
+    --bg-raised: #FCFAF6;
+    --ink: #1E2A28;
+    --ink-soft: #52625E;
+    --teal: #0E5449;
+    --teal-deep: #0A3D35;
+    --teal-dim: #E4EDE9;
+    --ochre: #B8792E;
+    --ochre-deep: #8F5C1F;
+    --ochre-dim: #F1E4D2;
+    --rule: #DCD3C4;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Public Sans', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  /* Hero */
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 22px;
+  }
+  .kicker::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--ochre);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(34px, 6vw, 46px);
+    line-height: 1.12;
+    color: var(--ink);
+    max-width: 15ch;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin-top: 20px;
+    max-width: 48ch;
+    line-height: 1.5;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal-deep);
+    background: #E8B96B;
+    padding: 7px 14px 7px 12px;
+    border-radius: 100px;
+    margin-top: 28px;
+  }
+  .hero-badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal-deep);
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 28px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .hero-meta strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  /* Sections */
+  section {
+    margin-top: 64px;
+  }
+
+  .section-label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 26px;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+
+  p { color: var(--ink-soft); font-size: 16px; }
+  p + p { margin-top: 12px; }
+
+  ul.plain {
+    list-style: none;
+    margin-top: 16px;
+  }
+  ul.plain li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  ul.plain li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  .not-included {
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 24px 26px;
+    margin-top: 16px;
+  }
+  .not-included p.note {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  .not-included ul.inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    list-style: none;
+  }
+  .not-included ul.inline li {
+    font-size: 14px;
+    color: var(--ink-soft);
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 100px;
+    padding: 5px 13px;
+  }
+
+  /* Investment */
+  .offer-panel {
+    background: var(--teal-deep);
+    border-radius: 8px;
+    padding: 32px 28px;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .offer-panel::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(184,121,46,0.18), transparent 70%);
+  }
+  .offer-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--teal-deep);
+    background: #E8B96B;
+    padding: 5px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.01em;
+  }
+  .offer-panel h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 21px;
+    color: #fff;
+    margin-top: 16px;
+    max-width: 32ch;
+    line-height: 1.35;
+  }
+  .offer-figures {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .offer-figures .was {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: #8FB0A8;
+    text-decoration: line-through;
+    text-decoration-color: rgba(143,176,168,0.6);
+  }
+  .offer-figures .now {
+    font-family: var(--serif);
+    font-size: 40px;
+    color: #fff;
+  }
+  .offer-figures .now sub {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: #C9DFDA;
+  }
+  .offer-panel .fine {
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: #BFDAD3;
+    max-width: 46ch;
+    line-height: 1.55;
+    position: relative;
+  }
+
+  .rate-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+    padding: 20px 22px;
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+  }
+  .rate-row .label {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .rate-row .label strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ink);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .rate-row .value {
+    font-family: var(--serif);
+    font-size: 26px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .rate-row .value sub {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  .budget-note {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 16px;
+    padding: 16px 18px;
+    background: var(--ochre-dim);
+    border-radius: 4px;
+    font-size: 14px;
+    color: #6B4A1E;
+  }
+
+  /* Process */
+  .steps { margin-top: 20px; }
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .step:last-child { border-bottom: 1px solid var(--rule); }
+  .step .num {
+    font-family: var(--serif);
+    color: var(--teal);
+    font-size: 18px;
+    flex-shrink: 0;
+    width: 24px;
+  }
+  .step .text { font-size: 15px; color: var(--ink-soft); padding-top: 1px; }
+
+  .results-note {
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-style: italic;
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+    margin-top: 16px;
+  }
+
+  .summary {
+    margin-top: 20px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--bg-raised);
+  }
+  .summary-row + .summary-row {
+    border-top: 1px solid var(--rule);
+  }
+  .summary-row .period { font-size: 15px; color: var(--ink-soft); }
+  .summary-row .figure {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .summary-row.total { background: var(--teal-dim); }
+  .summary-row.total .figure { color: var(--teal-deep); font-weight: 600; }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    .hero-meta { flex-direction: column; gap: 14px; }
+    .page { padding: 44px 20px 72px; }
+    .offer-panel { padding: 26px 20px; }
+    .offer-figures .now { font-size: 34px; }
+    .rate-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="kicker">Proposta comercial</div>
+  <h1>Gestão de tráfego pago para clínicas</h1>
+  <p class="lede">Estratégia, configuração e otimização contínua das campanhas — com foco em gerar novas oportunidades de atendimento a partir da verba investida em mídia.</p>
+
+  <div class="hero-badge"><span class="dot"></span>Condição especial no 1º mês: R$ 697 em vez de R$ 1.197</div>
+
+  <div class="hero-meta">
+    <div><strong>Serviço</strong>Gestão de campanhas</div>
+    <div><strong>Implantação</strong>1 mês</div>
+    <div><strong>Modelo</strong>Mensalidade fixa · R$ 1.197</div>
+  </div>
+
+  <section>
+    <div class="section-label">Objetivo</div>
+    <h2>Por que investir em gestão de tráfego</h2>
+    <p>Realizar a gestão estratégica das campanhas de tráfego pago da clínica, melhorando o desempenho, otimizando a utilização da verba investida e gerando novas oportunidades de atendimento.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Escopo</div>
+    <h2>O que está incluso</h2>
+    <ul class="plain">
+      <li>Planejamento e configuração das campanhas — públicos, segmentações e orçamento</li>
+      <li>Monitoramento e otimização contínua com base em dados</li>
+      <li>Análise de indicadores e custo por resultado</li>
+      <li>Alinhamentos periódicos e apresentação de resultados</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-label">Fora do escopo</div>
+    <h2>O que não está incluso</h2>
+    <div class="not-included">
+      <ul class="inline">
+        <li>Criação de artes</li>
+        <li>Edição de vídeos</li>
+        <li>Fotografia</li>
+        <li>Redes sociais</li>
+        <li>WhatsApp</li>
+        <li>Atendimento a pacientes</li>
+        <li>Sites e landing pages</li>
+        <li>Serviços de terceiros</li>
+      </ul>
+      <p class="note">Precisa de algo dessa lista? Podemos incluir mediante alinhamento e aprovação prévia entre as partes.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Investimento</div>
+    <h2>Valor da gestão</h2>
+    <div class="offer-panel">
+      <span class="offer-tag">Condição especial de entrada</span>
+      <h3>No primeiro mês, um sinal da nossa parceria: você paga menos para começarmos juntos.</h3>
+      <div class="offer-figures">
+        <span class="was">R$ 1.197</span>
+        <span class="now">R$ 697<sub>&nbsp;no 1º mês</sub></span>
+      </div>
+      <p class="fine">Inclui diagnóstico, estruturação e configuração inicial das campanhas — a base de tudo que vem depois.</p>
+    </div>
+
+    <div class="rate-row">
+      <div class="label">A partir do 2º mês<strong>Mensalidade fixa</strong></div>
+      <div class="value">R$ 1.197<sub>/mês</sub></div>
+    </div>
+
+    <div class="budget-note">A verba de anúncios não está inclusa neste valor — o investimento em mídia é definido separadamente, de acordo com a estratégia da clínica.</div>
+  </section>
+
+  <section>
+    <div class="section-label">Responsabilidades da clínica</div>
+    <h2>O que precisamos da sua parte</h2>
+    <p>Acesso às contas de anúncio e materiais necessários para configurar as campanhas, além do atendimento dos contatos gerados pelos anúncios — essa parte continua com o time da clínica.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Resultados</div>
+    <h2>Como acompanhamos o desempenho</h2>
+    <p>O trabalho é orientado por dados, testes e otimização contínua, buscando sempre a melhor utilização possível da verba destinada à publicidade.</p>
+    <p class="results-note">Não há garantia de volume específico de leads, consultas ou faturamento — os resultados dependem de fatores internos e externos à gestão de tráfego.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Próximos passos</div>
+    <h2>Como começamos</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div class="text">Aprovação da proposta</div></div>
+      <div class="step"><div class="num">2</div><div class="text">Alinhamento estratégico inicial</div></div>
+      <div class="step"><div class="num">3</div><div class="text">Liberação dos acessos e início da gestão</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Em resumo</div>
+    <h2>Resumo do investimento</h2>
+    <div class="summary">
+      <div class="summary-row total">
+        <span class="period">1º mês (implantação, com condição especial)</span>
+        <span class="figure">R$ 697</span>
+      </div>
+      <div class="summary-row">
+        <span class="period">A partir do 2º mês, todo mês</span>
+        <span class="figure">R$ 1.197</span>
+      </div>
+      <div class="summary-row">
+        <span class="period">Verba de anúncios</span>
+        <span class="figure">Definida à parte</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Proposta válida por 15 dias a partir da data de envio.
+  </footer>
+
+</div>
+</body>
+</html>
